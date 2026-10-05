@@ -1,83 +1,62 @@
-# FinanzIO — Workflow Agentivo
+# FinGenius 360 — Workflow agentico
 
 ## Flusso completo
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                        UTENTE                               │
-└────────────────────────────┬────────────────────────────────┘
-                             │
-                    [Avvia la sessione]
-                             │
-                             ▼
-┌─────────────────────────────────────────────────────────────┐
-│                     PRE-QUIZ (5 domande)                    │
-│  • Scenario reale → 3 opzioni                               │
-│  • Motivazione obbligatoria (testo libero)                  │
-└────────────────────────────┬────────────────────────────────┘
-                             │
-                    [Invia risposte]
-                             │
-                             ▼
-┌─────────────────────────────────────────────────────────────┐
-│                    AGENTE GENIUS                            │
-│                                                             │
-│  Step 1: score_quiz(answers)                               │
-│    → score: N/5                                            │
-│    → wrong_concepts: [lista concetti da ripassare]         │
-│                                                             │
-│  Step 2: select_lessons(wrong_concepts)                    │
-│    → lessons: [contenuto micro-lezioni rilevanti]          │
-│                                                             │
-│  Step 3: genera feedback personalizzato per ogni domanda   │
-│    → analizza la motivazione dell'utente                   │
-│    → spiega PERCHÉ la risposta è corretta/errata           │
-│    → tono incoraggiante, senza giudizi                     │
-└────────────────────────────┬────────────────────────────────┘
-                             │
-                             ▼
-┌─────────────────────────────────────────────────────────────┐
-│                   RISULTATI PRE-QUIZ                        │
-│  • Punteggio: N/5 (X%)                                     │
-│  • Feedback personalizzato per ogni risposta               │
-│  • Micro-lezioni sui concetti da ripassare                 │
-└────────────────────────────┬────────────────────────────────┘
-                             │
-                    [Legge le micro-lezioni]
-                             │
-                             ▼
-┌─────────────────────────────────────────────────────────────┐
-│                     POST-QUIZ (5 domande)                   │
-│  • Stesse domande, senza campo motivazione                  │
-└────────────────────────────┬────────────────────────────────┘
-                             │
-                             ▼
-┌─────────────────────────────────────────────────────────────┐
-│               MIGLIORAMENTO (Before / After)                │
-│  • Score prima: X%    Score dopo: Y%                        │
-│  • Delta: +Z punti percentuali                              │
-│  • Concetti appresi evidenziati                             │
-└─────────────────────────────────────────────────────────────┘
+UTENTE
+  │  sceglie il cluster (attivo: Prestiti & Finanziamenti)
+  ▼
+ROUND 1 · 5 situazioni (storia → domanda → 3 opzioni → motivazione obbligatoria)
+  │  dopo ogni risposta ──► POST /api/react ──► reazione socratica (Haiku 4.5)
+  ▼
+AGENTE GENIUS · POST /api/evaluate (Sonnet 5.5, max 6 turni, timeout 30 s)
+  │  turno 1: tool_choice forzato → analyze_answers()       [deterministico]
+  │           punteggio, concetti sbagliati e indovinati, lezioni da ripassare
+  │  turno 2: feedback personalizzato sulle motivazioni     [generativo, JSON]
+  │  errore o JSON non valido → risultato deterministico (demo)
+  ▼
+AULA DI GENIUS · una lezione per concetto debole
+  │  lavagna animata + sottotitoli + voce opzionale
+  │  🙋 domande ──► POST /api/ask
+  │       1. ADVICE_RE: richiesta di consiglio → risposta fissa       (0 token)
+  │       2. domanda suggerita → risposta verificata dalle FAQ        (0 token)
+  │       3. domanda libera → LLM vincolato ai materiali (Haiku 4.5)
+  │  domanda di verifica con numeri nuovi
+  ▼
+ROUND 2 · 5 situazioni NUOVE sugli stessi concetti (nessun LLM)
+  ▼
+PRIMA / DOPO · confronto punteggi, concetti studiati
+  │  Round 2 < 3/5
+  ▼
+ESPERTO · POST /api/contact (appuntamento o richiamata, consenso obbligatorio)
 ```
 
-## Tool Call Sequence (esempio)
+## Sequenza delle chiamate di /api/evaluate
 
 ```
-→ User message: "Risposte: [0, 0, 1, 0, 1]. Motivazioni: [...]"
-
-← Tool call: score_quiz({answers: [0,0,1,0,1]})
-→ Tool result: {score: 2, wrong_concepts: ["taeg_vs_tan","rata_costo_totale","anticipo"]}
-
-← Tool call: select_lessons({wrong_concepts: ["taeg_vs_tan","rata_costo_totale","anticipo"]})
-→ Tool result: {lessons: [{concept:"taeg_vs_tan", title:"...", content:"..."},...]}
-
-← Final text: JSON con score, feedback[], lessons[]
+→ user: 5 sintesi delle situazioni + risposta scelta + <motivazione>…</motivazione>
+← tool_use: analyze_answers({})                       (forzato da tool_choice)
+→ tool_result: {score, total, results[{q, concept, ok, guessed}], lessons_to_review[{concept, title}]}
+← text: {"feedback": [{question_index, personalized_feedback}], "encouragement": "…"}
 ```
+
+Il server usa dall'LLM solo i testi; punteggio, esiti e lezioni restano quelli calcolati dal codice.
+
+## Ottimizzazione dei token
+
+| Scelta | Effetto |
+|---|---|
+| Un solo tool senza input, forzato al primo turno | 2 chiamate invece di 3; nessun dato del punteggio passa dall'LLM |
+| Il tool restituisce concetti e titoli, non il testo delle lezioni | risultato del tool più piccolo |
+| Guardrail e FAQ prima dell'LLM in aula | le richieste di consiglio e le domande suggerite costano 0 token |
+| Haiku 4.5 per reazioni e domande in aula, Sonnet 5.5 per l'analisi | costo basso sui testi brevi |
+| Tetti di output (300 / 350 / 1500 token) e risposte di 3-4 frasi | output contenuto |
+| Round 2, aula e verifiche senza LLM | contenuti statici verificati |
 
 ## Garanzie educative
 
 | Cosa viene semplificato | Cosa NON viene alterato |
-|------------------------|------------------------|
-| Linguaggio tecnico → plain Italian | Numeri e percentuali reali |
-| Concetti astratti → esempi concreti | Definizioni normative (TAEG, TAN) |
-| Tono neutro → incoraggiante | Rapporto causa-effetto finanziario |
+|---|---|
+| Linguaggio tecnico → italiano quotidiano | Numeri e percentuali (dati statici verificati) |
+| Concetti astratti → storie, analogie, lavagna | Definizioni normative (TAEG, TAN) |
+| Tono neutro → incoraggiante | Rapporti causa-effetto finanziari |

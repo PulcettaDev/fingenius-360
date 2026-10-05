@@ -56,7 +56,7 @@ npm run check
 │   ├── agent.md            → Genius: responsabilità, vincoli, tool, guardrail
 │   ├── workflow.md         → flusso
 │   ├── prompts/            → system, reaction, ask
-│   ├── tools/              → score_quiz, select_lessons
+│   ├── tools/              → analyze_answers
 │   ├── skills/             → nuova-lezione, verifica-contenuti
 │   ├── team/               → commissione di agenti di sviluppo (finanza, UX, architetto, sviluppatore, tester)
 │   └── reports/            → review, solution design, testbook, test report
@@ -70,11 +70,12 @@ npm run check
 
 | Componente | Tipo | Scopo |
 |---|---|---|
-| `score_quiz` | Tool deterministico | Punteggio, concetti sbagliati e indovinati, calcolato sulle risposte reali (mai passato dall'LLM) |
-| `select_lessons` | Tool deterministico | Lezioni per i concetti da ripassare |
-| Feedback e reazioni | LLM (`claude-sonnet-5-5`) | Testi personalizzati a partire dalla motivazione dell'utente |
-| Domande in aula | LLM vincolato | Risposte basate solo sui materiali della lezione |
-| `ADVICE_RE` | Guardrail nel codice | Blocca le richieste di consiglio prima dell'LLM |
+| `analyze_answers` | Tool deterministico, forzato al primo turno | Punteggio, concetti sbagliati e indovinati, lezioni da ripassare: calcolati sulle risposte reali, mai passati dall'LLM |
+| Feedback di fine Round 1 | LLM (`claude-sonnet-5-5`) | Testi personalizzati a partire dalla motivazione dell'utente |
+| Reazioni e domande in aula | LLM veloce (`claude-haiku-4-5`) | Testi brevi; in aula solo con i materiali della lezione |
+| `ADVICE_RE` e FAQ | Codice | Richieste di consiglio bloccate e domande suggerite risposte senza chiamare l'LLM |
+
+**Token:** una sessione completa usa circa 4.500 token in ingresso (prima dell'ottimizzazione circa 9.500). L'analisi richiede 2 chiamate invece di 3, il tool restituisce solo concetti e titoli, guardrail e FAQ costano 0 token, Haiku gestisce i testi brevi. Dettagli in `agents/workflow.md`.
 
 | Endpoint | Quando |
 |---|---|

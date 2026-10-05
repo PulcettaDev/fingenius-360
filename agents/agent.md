@@ -23,11 +23,10 @@ Non fornisce consulenza finanziaria né raccomandazioni: il suo scopo è far cap
 
 | Tool | Tipo | Scopo |
 |------|------|-------|
-| `score_quiz` | Deterministico | Punteggio, concetti sbagliati, concetti indovinati |
-| `select_lessons` | Deterministico | Micro-lezioni per i concetti da ripassare |
+| `analyze_answers` | Deterministico, forzato al primo turno | Punteggio, concetti sbagliati e indovinati, lezioni da ripassare |
 
 I calcoli sono deterministici (codice), il linguaggio è generato dall'LLM: i numeri non possono essere "allucinati".
-Il punteggio non passa mai dall'LLM: `score_quiz` lavora sulle risposte ricevute dal server e la risposta finale dell'agente fornisce solo i testi.
+Il punteggio non passa mai dall'LLM: `analyze_answers` lavora sulle risposte ricevute dal server e la risposta finale dell'agente fornisce solo i testi.
 
 ## Aula di Genius (videolezioni interattive)
 
@@ -68,5 +67,5 @@ Ogni nuovo cluster richiede solo: 5 situazioni, risposte corrette, 5 micro-lezio
 
 ## Modello
 
-- Provider: Anthropic — `claude-sonnet-5-5`
+- Provider: Anthropic — `claude-sonnet-5-5` per l'analisi di fine Round 1, `claude-haiku-4-5` per reazioni e domande in aula (testi brevi, costo ridotto)
 - Senza `ANTHROPIC_API_KEY` il server gira in **demo mode** con feedback precompilati e gli stessi tool.

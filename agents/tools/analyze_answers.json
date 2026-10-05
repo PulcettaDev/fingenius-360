@@ -1,0 +1,25 @@
+{
+  "name": "analyze_answers",
+  "description": "Analizza le risposte inviate dall'utente: esito per domanda, concetti sbagliati, concetti indovinati a caso (risposta giusta ma motivazione \"NON LO SO\") e lezioni da ripassare.",
+  "input_schema": {
+    "type": "object",
+    "properties": {}
+  },
+  "invocation": "Forzato al primo turno con tool_choice: {type: 'tool', name: 'analyze_answers'}",
+  "security_note": "Il tool non riceve input dall'LLM: lavora sulle risposte e motivazioni validate dal server, quindi il punteggio non può essere alterato da prompt injection nella motivazione.",
+  "token_note": "Restituisce solo concetti e titoli delle lezioni (non il testo completo, che serve solo all'aula), per tenere piccolo il contesto del turno successivo.",
+  "output_example": {
+    "score": 3,
+    "total": 5,
+    "results": [
+      { "q": 1, "concept": "taeg_vs_tan", "ok": false, "guessed": false },
+      { "q": 3, "concept": "tasso_zero", "ok": true, "guessed": true }
+    ],
+    "lessons_to_review": [
+      { "concept": "taeg_vs_tan", "title": "TAEG vs TAN: qual è il costo reale?" },
+      { "concept": "tasso_zero", "title": "Il \"tasso zero\" non è sempre gratis" }
+    ]
+  },
+  "adaptive_rule": "Una risposta corretta con motivazione 'NON LO SO' conta nel punteggio ma il concetto viene comunque ripassato: separa la fortuna dalla comprensione.",
+  "implementation": "app/server.js → analyzeAnswers() (usa scoreQuiz)"
+}
