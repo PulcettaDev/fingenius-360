@@ -1,0 +1,22 @@
+{
+  "name": "score_quiz",
+  "description": "Calcola il punteggio del quiz sulle risposte inviate dall'utente. Restituisce l'esito per domanda, i concetti sbagliati e quelli indovinati a caso (risposta giusta ma motivazione \"NON LO SO\").",
+  "input_schema": {
+    "type": "object",
+    "properties": {}
+  },
+  "security_note": "Il tool non riceve input dall'LLM: lavora sulle risposte e motivazioni validate dal server. Così il punteggio non può essere alterato da prompt injection nella motivazione.",
+  "output_example": {
+    "score": 4,
+    "total": 5,
+    "percentage": 80,
+    "results": [
+      { "question_index": 0, "concept": "taeg_vs_tan", "is_correct": false, "guessed": false },
+      { "question_index": 2, "concept": "tasso_zero", "is_correct": true, "guessed": true }
+    ],
+    "wrong_concepts": ["taeg_vs_tan"],
+    "guessed_concepts": ["tasso_zero"]
+  },
+  "adaptive_rule": "Una risposta corretta con motivazione 'NON LO SO' conta nel punteggio ma il concetto viene comunque ripassato: separa la fortuna dalla comprensione.",
+  "implementation": "app/server.js → scoreQuiz()"
+}

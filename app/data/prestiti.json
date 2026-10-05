@@ -1,0 +1,351 @@
+{
+  "cluster": "prestiti",
+  "questions": [
+    {
+      "concept": "taeg_vs_tan", "icon": "🏠", "chapter": "La cucina nuova",
+      "story": [
+        "Hai deciso: è ora di rifare la cucina. Il preventivo è di <strong>€5.000</strong> e non vuoi svuotare il conto.",
+        "Esci dalla <strong>banca A</strong> con un foglio in mano: <strong>TAN 5% · TAEG 6,2%</strong>.",
+        "Poi passi dalla <strong>banca B</strong>. Il consulente sorride: \"Da noi <strong>TAN 5,5% · TAEG 5,8%</strong>\"."
+      ],
+      "question": "Quale delle due offerte ti costerà meno, alla fine?",
+      "options": ["La banca A, perché ha il TAN più basso", "La banca B, perché ha il TAEG più basso", "Sono equivalenti: cambia solo la banca"],
+      "correct": 1,
+      "summary": "Prestito €5.000 per la cucina. Banca A: TAN 5% / TAEG 6,2%. Banca B: TAN 5,5% / TAEG 5,8%. Quale costa meno? Opzioni: A) Banca A, B) Banca B, C) Uguali. Corretta: B."
+    },
+    {
+      "concept": "rata_costo_totale", "icon": "🚗", "chapter": "L'auto usata",
+      "story": [
+        "La tua vecchia utilitaria ti ha lasciato a piedi per la terza volta questo mese. 😩",
+        "In concessionaria trovi un'usata perfetta: <strong>€8.000</strong>. Il venditore ti mostra due piani: <strong>24 rate da €370</strong> al mese oppure <strong>48 rate da €210</strong>.",
+        "\"Con la seconda respiri di più ogni mese!\", ti dice strizzando l'occhio."
+      ],
+      "question": "Quale piano ti fa spendere meno in totale?",
+      "options": ["Le 24 rate da €370", "Le 48 rate da €210", "Si spende uguale, cambia solo quanto pago al mese"],
+      "correct": 0,
+      "summary": "Auto usata €8.000. Piano A: 24 rate da €370 (totale €8.880). Piano B: 48 rate da €210 (totale €10.080). Quale costa meno in totale? Opzioni: A) 24 rate, B) 48 rate, C) Uguale. Corretta: A."
+    },
+    {
+      "concept": "tasso_zero", "icon": "📱", "chapter": "Lo smartphone",
+      "story": [
+        "Lo schermo del tuo telefono è andato in mille pezzi. 📱💥",
+        "In negozio il modello che ti piace ha due cartellini: <strong>€620 pagando subito</strong> oppure <strong>12 rate da €58,33 — \"TASSO ZERO!\"</strong>"
+      ],
+      "question": "Quale scelta ti fa pagare meno?",
+      "options": ["Le rate a tasso zero: non pago interessi", "Pagare subito €620", "È lo stesso: tasso zero vuol dire nessun costo in più"],
+      "correct": 1,
+      "summary": "Smartphone: €620 subito oppure 12 rate \"tasso zero\" da €58,33 (totale €700). Quale fa pagare meno? Opzioni: A) Rate tasso zero, B) Pagare subito, C) Uguale. Corretta: B."
+    },
+    {
+      "concept": "anticipo", "icon": "🛵", "chapter": "Lo scooter",
+      "story": [
+        "Col nuovo lavoro ti serve uno scooter: costa <strong>€6.000</strong>. Hai <strong>€1.500</strong> da parte.",
+        "Il venditore propone due strade: <strong>nessun anticipo e 36 rate da €185</strong>, oppure <strong>€1.500 di anticipo e 24 rate da €205</strong>."
+      ],
+      "question": "Quale soluzione ti fa spendere meno in totale?",
+      "options": ["Nessun anticipo e 36 rate", "Anticipo di €1.500 e 24 rate", "Si spende uguale"],
+      "correct": 1,
+      "summary": "Scooter €6.000. A: nessun anticipo, 36 rate da €185 (totale €6.660). B: €1.500 anticipo + 24 rate da €205 (totale €6.420). Quale costa meno in totale? Opzioni: A) Senza anticipo, B) Con anticipo, C) Uguale. Corretta: B."
+    },
+    {
+      "concept": "revolving", "icon": "💳", "chapter": "La carta revolving",
+      "story": [
+        "Qualche mese di imprevisti e il saldo della tua carta revolving è arrivato a <strong>€3.000</strong>.",
+        "L'estratto conto dice: <strong>\"Rata minima: €60\"</strong>. Il tasso è del <strong>21% annuo</strong>.",
+        "Decidi di pagare solo la rata minima e di non usare più la carta."
+      ],
+      "question": "Quanto tempo ci vorrà per azzerare il debito?",
+      "options": ["Circa 2 anni", "Circa 5 anni", "Circa 10 anni"],
+      "correct": 2,
+      "summary": "Carta revolving: debito €3.000, tasso 21% annuo, si paga solo la rata minima di €60. Quanto serve per azzerare il debito? Opzioni: A) ~2 anni, B) ~5 anni, C) ~10 anni. Corretta: C (circa 120 mesi, oltre €4.000 di interessi)."
+    }
+  ],
+
+  "round2": [
+    {
+      "concept": "taeg_vs_tan", "icon": "🎓", "chapter": "Il corso di specializzazione",
+      "story": [
+        "Vuoi iscriverti a un corso di specializzazione da <strong>€4.000</strong> e pagarlo in 24 mesi.",
+        "La <strong>finanziaria X</strong> propone <strong>TAN 7,2% · TAEG 8,9%</strong>. La <strong>finanziaria Y</strong> propone <strong>TAN 7,9% · TAEG 8,3%</strong>, stesso importo e stessa durata."
+      ],
+      "question": "Quale offerta ha il costo complessivo più basso?",
+      "options": ["La finanziaria X, perché ha il TAN più basso", "La finanziaria Y, perché ha il TAEG più basso", "Non si può dire senza conoscere le finanziarie"],
+      "correct": 1
+    },
+    {
+      "concept": "rata_costo_totale", "icon": "💻", "chapter": "Il computer per lo studio",
+      "story": [
+        "Il tuo portatile non regge più: quello nuovo costa <strong>€1.500</strong>.",
+        "Il negozio propone <strong>12 rate da €132</strong> oppure <strong>30 rate da €57</strong>. \"La seconda non la senti nemmeno!\""
+      ],
+      "question": "Quale piano ti fa spendere meno in totale?",
+      "options": ["Le 12 rate da €132", "Le 30 rate da €57", "Si spende uguale, cambia solo la rata"],
+      "correct": 0,
+      "checks": [
+        { "a": 12, "b": 132, "op": "mul", "result": 1584 },
+        { "a": 30, "b": 57, "op": "mul", "result": 1710 }
+      ]
+    },
+    {
+      "concept": "tasso_zero", "icon": "📺", "chapter": "Il televisore",
+      "story": [
+        "La finale del campionato si avvicina e il vecchio televisore ha deciso di arrendersi. 📺",
+        "Il cartellino dice: <strong>€900 pagando subito</strong> oppure <strong>10 rate da €90 a \"TAN 0%\"</strong>, con <strong>€25 di spese di istruttoria</strong>."
+      ],
+      "question": "Quale scelta ti fa pagare meno?",
+      "options": ["Le rate: TAN 0% vuol dire nessun costo", "Pagare subito €900", "È uguale: 10 × €90 fa €900"],
+      "correct": 1,
+      "checks": [
+        { "a": 10, "b": 90, "op": "mul", "plus": 25, "result": 925 }
+      ]
+    },
+    {
+      "concept": "anticipo", "icon": "🏍️", "chapter": "La moto",
+      "story": [
+        "Hai trovato la moto dei tuoi sogni: <strong>€10.000</strong>. Hai <strong>€3.000</strong> da parte.",
+        "Due proposte, entrambe in 48 mesi: <strong>nessun anticipo e 48 rate da €250</strong>, oppure <strong>€3.000 di anticipo e 48 rate da €175</strong>."
+      ],
+      "question": "Quale soluzione ti fa spendere meno in totale?",
+      "options": ["Nessun anticipo e 48 rate da €250", "Anticipo di €3.000 e 48 rate da €175", "Si spende uguale"],
+      "correct": 1,
+      "checks": [
+        { "a": 48, "b": 250, "op": "mul", "result": 12000 },
+        { "a": 48, "b": 175, "op": "mul", "plus": 3000, "result": 11400 }
+      ]
+    },
+    {
+      "concept": "revolving", "icon": "🛍️", "chapter": "Gli acquisti online",
+      "story": [
+        "Tra regali e acquisti online, il saldo della tua carta revolving è arrivato a <strong>€1.500</strong>.",
+        "Il tasso è del <strong>20% annuo</strong> e la <strong>rata minima è di €30</strong>. Decidi di pagare solo quella e di non usare più la carta."
+      ],
+      "question": "Quanto tempo ci vorrà, più o meno, per azzerare il debito?",
+      "options": ["Circa un anno e mezzo", "Circa 4 anni", "Circa 9 anni"],
+      "correct": 2,
+      "checks": [
+        { "a": 1500, "b": 0.016667, "op": "mul", "result": 25, "tol": 0.01 },
+        { "a": 1500, "b": 30, "op": "div", "result": 50 }
+      ]
+    }
+  ],
+
+  "lessons": {
+    "taeg_vs_tan": {
+      "title": "TAEG vs TAN: qual è il costo reale?",
+      "content": "Il TAN (Tasso Annuo Nominale) misura solo gli interessi del prestito. Il TAEG (Tasso Annuo Effettivo Globale) include anche le altre spese obbligatorie: istruttoria, incasso rata, eventuali assicurazioni richieste. Per legge il TAEG deve essere sempre indicato nelle offerte di credito ai consumatori, proprio per permettere un confronto alla pari tra offerte diverse.",
+      "key_takeaway": "TAN = solo interessi. TAEG = costo complessivo. Per confrontare due prestiti si guarda il TAEG.",
+      "scenes": [
+        { "say": "Benvenuto in aula! 🎓 Oggi smascheriamo due sigle che sembrano gemelle ma raccontano cose diverse: TAN e TAEG.",
+          "board": { "type": "title", "text": "TAN vs TAEG", "sub": "Qual è il costo reale di un prestito?" } },
+        { "say": "Il TAN è come il biglietto base di un volo: conta solo gli interessi. Il TAEG è il prezzo finale, con dentro anche istruttoria, incasso rata e assicurazioni obbligatorie.",
+          "board": { "type": "compare", "cols": [
+            { "head": "TAN", "lines": ["Tasso Annuo Nominale", "solo gli interessi"] },
+            { "head": "TAEG", "lines": ["Tasso Annuo Effettivo Globale", "interessi", "+ istruttoria", "+ incasso rata", "+ assicurazioni obbligatorie"], "hl": true }
+          ] } },
+        { "say": "Torniamo alla cucina da 5.000 euro. La banca A ha il TAN più basso, ma il TAEG più alto: tra 5% e 6,2% ci sono le spese. Nella banca B la distanza tra i due numeri è molto più piccola.",
+          "board": { "type": "compare", "title": "La cucina da €5.000", "cols": [
+            { "head": "Banca A", "lines": ["TAN 5%", "TAEG 6,2%"] },
+            { "head": "Banca B", "lines": ["TAN 5,5%", "TAEG 5,8%"], "hl": true }
+          ] } },
+        { "say": "Ecco la regola da portare a casa. E una buona notizia: per legge il TAEG deve essere sempre indicato nelle offerte di credito ai consumatori.",
+          "board": { "type": "rule", "text": "Per confrontare prestiti con stesso importo e durata, guarda il TAEG: è il costo complessivo." } }
+      ],
+      "faq": [
+        { "q": "Cosa c'è dentro il TAEG?", "keys": ["dentro", "include", "comprende", "contiene", "compost", "spese"],
+          "a": "Nel TAEG ci sono gli interessi (cioè il TAN) più le spese obbligatorie per ottenere il prestito: per esempio istruttoria, incasso di ogni rata, imposte e assicurazioni richieste come condizione. Per questo è il numero che racconta il costo complessivo. 🔍" },
+        { "q": "Perché il TAN non basta?", "keys": ["tan non", "basta", "nominale", "solo tan"],
+          "a": "Perché il TAN misura solo gli interessi. Due offerte con lo stesso TAN possono avere spese molto diverse: è come confrontare due voli guardando solo il biglietto base, senza bagaglio e tasse. ✈️" },
+        { "q": "Dove trovo il TAEG in un'offerta?", "keys": ["dove", "trovo", "legge", "obbligator", "scritto", "secci", "modulo"],
+          "a": "Per legge il TAEG deve comparire nelle pubblicità che citano un tasso e nel modulo informativo standard che ricevi prima di firmare (le \"Informazioni europee di base sul credito ai consumatori\"). Se vedi solo il TAN, puoi chiedere il TAEG." },
+        { "q": "E se la durata è diversa?", "keys": ["durata", "divers", "mesi", "anni", "importo"],
+          "a": "Il TAEG è un tasso annuo: ti dice quanto costa il prestito per ogni anno. Se importi o durate sono diversi, guarda anche l'importo totale dovuto in euro, che nelle offerte va sempre indicato." }
+      ],
+      "check": {
+        "question": "Due offerte per lo stesso importo e la stessa durata. Offerta X: TAN 6,9% · TAEG 7,4%. Offerta Y: TAN 6,5% · TAEG 7,9%. Quale ha il costo complessivo più basso?",
+        "options": ["L'offerta X", "L'offerta Y", "Non si può dire"],
+        "correct": 0,
+        "reactions": [
+          "Hai messo a confronto i due prezzi finali: TAEG 7,4% contro 7,9%. Il TAN più basso di Y racconta solo una parte della storia.",
+          "Il 6,5% di Y è il biglietto base ✈️. Il prezzo finale, il TAEG, è 7,9% contro il 7,4% di X. Quale dei due numeri esce davvero dal conto?",
+          "Un modo per dirlo c'è: con stesso importo e stessa durata, il TAEG mette tutti i costi nello stesso numero. 7,4% contro 7,9%…"
+        ]
+      }
+    },
+
+    "rata_costo_totale": {
+      "title": "La rata piccola può costare di più",
+      "content": "Una rata mensile bassa di solito significa una durata più lunga, e più mesi vuol dire più interessi. Il calcolo è semplice: rata × numero di mesi = quanto paghi in totale. Esempio: €8.000 in 24 rate da €370 = €8.880. Gli stessi €8.000 in 48 rate da €210 = €10.080. La differenza è di €1.200.",
+      "key_takeaway": "Rata × mesi = costo totale. A parità di importo, una durata più lunga costa quasi sempre di più.",
+      "scenes": [
+        { "say": "Bentornato in aula! 🎓 Oggi impariamo il trucco più semplice e più utile della finanza personale: una moltiplicazione.",
+          "board": { "type": "title", "text": "Rata piccola, conto grande?", "sub": "Il trucco della moltiplicazione" } },
+        { "say": "Ricordi l'auto da 8.000 euro? Moltiplichiamo la rata per il numero di mesi. 24 per 370 fa 8.880 euro. 48 per 210 fa 10.080 euro.",
+          "board": { "type": "calc", "title": "Rata × mesi = totale", "rows": [
+            { "show": "24 rate × €370 = €8.880", "check": { "a": 24, "b": 370, "op": "mul", "result": 8880 } },
+            { "show": "48 rate × €210 = €10.080", "check": { "a": 48, "b": 210, "op": "mul", "result": 10080 } }
+          ] } },
+        { "say": "Togliamo il prezzo dell'auto e restano gli interessi: 880 euro con 24 rate, 2.080 euro con 48. La rata più leggera dura il doppio e costa 1.200 euro in più.",
+          "board": { "type": "bars", "title": "Interessi pagati", "unit": "€", "items": [
+            { "label": "24 rate", "value": 880 },
+            { "label": "48 rate", "value": 2080 }
+          ], "rows": [
+            { "show": "€8.880 − €8.000 = €880", "check": { "a": 8880, "b": 8000, "op": "sub", "result": 880 } },
+            { "show": "€10.080 − €8.000 = €2.080", "check": { "a": 10080, "b": 8000, "op": "sub", "result": 2080 } }
+          ] } },
+        { "say": "La regola: prima di guardare quanto pesa la rata, moltiplicala per i mesi. Una rata bassa fa respirare oggi, ma il conto finale può essere più alto.",
+          "board": { "type": "rule", "text": "Rata × mesi = quanto paghi davvero. A parità di importo, più mesi = più interessi." } }
+      ],
+      "faq": [
+        { "q": "Perché più mesi costano di più?", "keys": ["perché", "più mesi", "durata", "lung", "tempo"],
+          "a": "Perché gli interessi si pagano per ogni mese in cui hai ancora soldi in prestito. Se restituisci in 48 mesi invece che in 24, il debito resta aperto più a lungo e gli interessi continuano a correre. ⏳" },
+        { "q": "Una rata bassa è sempre un problema?", "keys": ["bassa", "sempre", "problema", "male", "sbagliat"],
+          "a": "No: una rata bassa pesa meno sul bilancio di ogni mese, ed è un aspetto reale. Il punto è conoscere anche il costo totale, così confronti le offerte guardando entrambi i numeri: la rata e quanto paghi in tutto." },
+        { "q": "Come calcolo gli interessi?", "keys": ["calcol", "interessi", "quanto", "conto"],
+          "a": "Il modo più semplice: rata × numero di rate = totale pagato. Poi togli l'importo prestato: quello che resta sono interessi e spese. Esempio: 24 × €370 = €8.880; €8.880 − €8.000 = €880. 🧮" },
+        { "q": "Cos'è l'importo totale dovuto?", "keys": ["totale dovuto", "importo totale", "offerta", "contratto"],
+          "a": "È la somma di tutto quello che restituirai: capitale più interessi e spese. Nelle offerte di credito deve essere indicato, ed è il numero che corrisponde a rata × mesi." }
+      ],
+      "check": {
+        "question": "Un divano da €2.000. Piano 1: 10 rate da €210. Piano 2: 20 rate da €115. Quale costa meno in totale?",
+        "options": ["Il piano 1 (10 rate)", "Il piano 2 (20 rate)", "Costano uguale"],
+        "correct": 0,
+        "reactions": [
+          "Hai usato la moltiplicazione: 10 × €210 = €2.100 e 20 × €115 = €2.300. Dietro la rata più bassa ci sono €200 di differenza.",
+          "La rata da €115 è più leggera, vero. Ma moltiplichiamo: 20 × €115 = €2.300, mentre 10 × €210 = €2.100. Che cosa ti dicono i totali?",
+          "Proviamo il trucco: 10 × €210 = €2.100 e 20 × €115 = €2.300. Ti sembrano uguali? 🧮"
+        ]
+      }
+    },
+
+    "tasso_zero": {
+      "title": "Il \"tasso zero\" non è sempre gratis",
+      "content": "\"Tasso zero\" significa che non ci sono interessi espliciti, ma non garantisce che paghi lo stesso prezzo. A volte il prezzo a rate è più alto del prezzo pagando subito, oppure ci sono spese di istruttoria o di incasso rata. Per capirlo basta confrontare il totale delle rate (più eventuali spese) con il prezzo in un'unica soluzione. Se ci sono spese, il TAEG non sarà zero.",
+      "key_takeaway": "Confronta sempre il totale delle rate con il prezzo pagando subito. Guarda il TAEG, non solo il TAN.",
+      "scenes": [
+        { "say": "Benvenuto in aula! 🎓 Oggi indaghiamo su due parole magiche che si trovano in tanti negozi: tasso zero.",
+          "board": { "type": "title", "text": "Tasso zero = gratis?", "sub": "Il costo che non si vede" } },
+        { "say": "Lo smartphone costava 620 euro pagando subito. Con le rate: 12 per 58,33 fa 700 euro. Ottanta euro in più, anche se gli interessi sono zero.",
+          "board": { "type": "calc", "title": "Facciamo i conti", "rows": [
+            { "show": "12 rate × €58,33 = €700", "check": { "a": 12, "b": 58.33, "op": "mul", "result": 700, "tol": 0.5 } },
+            { "show": "€700 − €620 = €80 in più", "check": { "a": 700, "b": 620, "op": "sub", "result": 80 } }
+          ] } },
+        { "say": "Quegli 80 euro sono nascosti nel prezzo. Se li trasformiamo in un tasso, è come pagare un prestito con un tasso annuo di oltre il 20%.",
+          "board": { "type": "bars", "title": "Lo stesso smartphone", "unit": "€", "items": [
+            { "label": "Pagando subito", "value": 620 },
+            { "label": "Totale delle rate", "value": 700 }
+          ] } },
+        { "say": "La regola: la domanda magica è quanto costa se pago subito? Poi confronta con il totale delle rate. E se ci sono spese di istruttoria o di incasso, il TAEG non sarà zero.",
+          "board": { "type": "rule", "text": "Confronta il totale delle rate (più eventuali spese) con il prezzo pagando subito. Guarda il TAEG, non solo il TAN." } }
+      ],
+      "faq": [
+        { "q": "Allora il tasso zero è sempre una fregatura?", "keys": ["fregatura", "sempre", "truffa", "inganno"],
+          "a": "No. Esistono offerte in cui il totale delle rate è uguale al prezzo pagando subito e non ci sono spese: in quel caso TAN e TAEG sono entrambi zero. Il punto è verificarlo con un confronto, non fidarsi della scritta." },
+        { "q": "Cosa significa TAN 0 e TAEG 0?", "keys": ["tan 0", "taeg 0", "tan zero", "taeg zero", "entrambi"],
+          "a": "TAN 0% vuol dire niente interessi. TAEG 0% vuol dire niente interessi e niente spese obbligatorie. Se il TAN è zero ma il TAEG no, ci sono costi accessori come istruttoria o incasso rata." },
+        { "q": "Come arrivi a oltre il 20%?", "keys": ["20", "venti", "tasso annuo", "come arrivi", "calcolat"],
+          "a": "Pagare €700 in 12 rate invece di €620 subito è come prendere in prestito €620 e restituire €80 in più nel giro di un anno, su un debito che scende ogni mese. Facendo il calcolo come per un prestito, si ottiene un tasso annuo di oltre il 20%." },
+        { "q": "Quali spese possono esserci?", "keys": ["spese", "istruttoria", "incasso", "commission", "costi"],
+          "a": "Le più comuni sono le spese di istruttoria (all'apertura), di incasso rata (ogni mese) e l'imposta di bollo. Sono tutte comprese nel TAEG: per questo è il numero da guardare." }
+      ],
+      "check": {
+        "question": "Delle cuffie costano €180 pagando subito, oppure 10 rate da €20 a \"tasso zero\" senza spese. Quanto paghi in più scegliendo le rate?",
+        "options": ["€0: è tasso zero", "€20", "€200"],
+        "correct": 1,
+        "reactions": [
+          "Tasso zero vuol dire niente interessi, ma il prezzo? 10 × €20 = €200, contro €180 pagando subito…",
+          "Hai fatto moltiplicazione e sottrazione: 10 × €20 = €200, e €200 − €180 = €20. Il costo sta nel prezzo, non nel tasso. 🏷️",
+          "€200 è il totale delle rate (10 × €20). Ma la domanda è quanto paghi in più rispetto ai €180 pagando subito…"
+        ]
+      }
+    },
+
+    "anticipo": {
+      "title": "Più anticipo = meno interessi",
+      "content": "Gli interessi si calcolano sulla somma che finanzi, non sul prezzo del bene. Su uno scooter da €6.000, versando €1.500 di anticipo finanzi solo €4.500: gli interessi maturano su quella cifra. Meno capitale finanziato, meno interessi totali. L'anticipo però riduce i soldi che hai a disposizione subito: è un aspetto da considerare insieme al costo.",
+      "key_takeaway": "L'anticipo riduce la somma finanziata, e quindi gli interessi totali.",
+      "scenes": [
+        { "say": "Benvenuto in aula! 🎓 Oggi scopriamo un segreto dei prestiti: gli interessi non si calcolano sul prezzo, ma su quanto prendi in prestito.",
+          "board": { "type": "title", "text": "L'anticipo e gli interessi", "sub": "Su cosa si pagano davvero gli interessi?" } },
+        { "say": "Lo scooter costa 6.000 euro. Senza anticipo prendi in prestito tutto. Con 1.500 euro di anticipo ne prendi in prestito solo 4.500: gli interessi corrono su questa cifra.",
+          "board": { "type": "compare", "title": "Scooter da €6.000", "cols": [
+            { "head": "Senza anticipo", "lines": ["Prezzo €6.000", "Finanzi €6.000"] },
+            { "head": "Anticipo €1.500", "lines": ["Prezzo €6.000", "Finanzi €4.500"], "hl": true }
+          ] } },
+        { "say": "Facciamo i conti fino all'ultimo euro. Senza anticipo: 36 per 185, 6.660 euro. Con anticipo: 1.500 più 24 per 205, 6.420 euro.",
+          "board": { "type": "calc", "title": "Quanto paghi in tutto", "rows": [
+            { "show": "36 × €185 = €6.660", "check": { "a": 36, "b": 185, "op": "mul", "result": 6660 } },
+            { "show": "€1.500 + 24 × €205 = €6.420", "check": { "a": 24, "b": 205, "op": "mul", "plus": 1500, "result": 6420 } }
+          ] } },
+        { "say": "La regola: meno soldi in prestito, meno interessi. Ricorda però che l'anticipo riduce i soldi che hai a disposizione subito: è un aspetto da considerare insieme al costo.",
+          "board": { "type": "rule", "text": "Gli interessi maturano solo sulla somma finanziata: meno capitale in prestito = meno interessi." } }
+      ],
+      "faq": [
+        { "q": "Perché l'anticipo riduce gli interessi?", "keys": ["perché", "riduce", "meno interessi"],
+          "a": "Perché gli interessi sono una percentuale del debito. Se versi €1.500 subito, il debito parte da €4.500 invece che da €6.000: la stessa percentuale applicata a una cifra più piccola dà meno euro di interessi." },
+        { "q": "L'anticipo è sempre la scelta migliore?", "keys": ["sempre", "migliore", "meglio", "scelta"],
+          "a": "Non c'è una risposta valida per tutti, e non posso dirti cosa scegliere 🙏. Dal lato del costo, meno debito significa meno interessi. Dall'altro lato, l'anticipo riduce i soldi disponibili per gli imprevisti. Sono due aspetti da pesare insieme." },
+        { "q": "Quanto pago di interessi nei due casi?", "keys": ["totali", "interessi totali", "quanto pago", "costo", "due casi"],
+          "a": "Togli il prezzo dal totale pagato. Senza anticipo: €6.660 − €6.000 = €660. Con anticipo: €6.420 − €6.000 = €420, contando anche i €1.500 versati all'inizio." },
+        { "q": "Cos'è il capitale finanziato?", "keys": ["capitale", "finanziat", "somma"],
+          "a": "È la somma che ti viene effettivamente prestata: il prezzo del bene meno l'anticipo. Su uno scooter da €6.000 con €1.500 di anticipo, il capitale finanziato è €4.500." }
+      ],
+      "check": {
+        "question": "Una bici elettrica costa €2.000. Senza anticipo: 12 rate da €180. Con €500 di anticipo: 12 rate da €135. Quale soluzione costa meno in totale?",
+        "options": ["Senza anticipo", "Con €500 di anticipo", "Costano uguale"],
+        "correct": 1,
+        "reactions": [
+          "Contiamo tutto: senza anticipo 12 × €180 = €2.160. Con anticipo €500 + 12 × €135 = €2.120. Gli interessi corrono su €2.000 nel primo caso e su €1.500 nel secondo.",
+          "Hai contato anche l'anticipo: €500 + 12 × €135 = €2.120, contro 12 × €180 = €2.160. Meno debito, meno interessi: €120 contro €160. 🔧",
+          "Mettiamo in fila i numeri: 12 × €180 = €2.160; €500 + 12 × €135 = €2.120. Uguali?"
+        ]
+      }
+    },
+
+    "revolving": {
+      "title": "La trappola della rata minima",
+      "content": "Su una carta revolving con debito di €3.000 al 21% annuo, ogni mese maturano circa €52 di interessi. Pagando la rata minima di €60, solo €8 circa riducono il debito. Risultato: servono circa 10 anni (120 mesi) per azzerarlo e si pagano oltre €4.000 di interessi, più del debito iniziale. Ogni euro pagato oltre la rata minima va direttamente a ridurre il debito.",
+      "key_takeaway": "Con la rata minima si pagano soprattutto interessi: il debito scende molto lentamente.",
+      "scenes": [
+        { "say": "Benvenuto in aula! 🎓 Oggi parliamo della carta revolving e di un ospite invisibile che si mangia gran parte della rata: gli interessi.",
+          "board": { "type": "title", "text": "La trappola della rata minima", "sub": "Chi passa prima alla cassa?" } },
+        { "say": "Debito di 3.000 euro al 21% annuo: ogni mese maturano circa 52 euro di interessi. Dei 60 euro di rata minima, solo 8 circa riducono davvero il debito.",
+          "board": { "type": "calc", "title": "Il primo mese", "rows": [
+            { "show": "€3.000 × 21% ÷ 12 ≈ €52 di interessi", "check": { "a": 3000, "b": 0.0175, "op": "mul", "result": 52.5, "tol": 0.6 } },
+            { "show": "€60 − €52 = €8 per ridurre il debito", "check": { "a": 60, "b": 52, "op": "sub", "result": 8 } }
+          ] } },
+        { "say": "Guarda la rata da 60 euro divisa in due: quasi tutto va in interessi. Il debito scende così lentamente che servono circa 10 anni, cioè 120 mesi.",
+          "board": { "type": "bars", "title": "Dove vanno i tuoi €60", "unit": "€", "max": 60, "items": [
+            { "label": "Interessi", "value": 52 },
+            { "label": "Debito", "value": 8 }
+          ] } },
+        { "say": "In tutto paghi circa 7.200 euro: oltre 4.000 sono interessi, più del debito iniziale.",
+          "board": { "type": "calc", "title": "Il conto finale", "rows": [
+            { "show": "≈ 120 rate × €60 ≈ €7.200 pagati", "check": { "a": 120, "b": 60, "op": "mul", "result": 7200 } },
+            { "show": "€7.200 − €3.000 = oltre €4.000 di interessi", "check": { "a": 7200, "b": 3000, "op": "sub", "result": 4200 } }
+          ] } },
+        { "say": "La regola: con la rata minima il debito scende molto lentamente. Ogni euro pagato oltre la rata minima va direttamente a ridurre il debito.",
+          "board": { "type": "rule", "text": "Con la rata minima si pagano soprattutto interessi. Ogni euro oltre la rata minima riduce il debito." } }
+      ],
+      "faq": [
+        { "q": "Perché gli interessi sono così alti?", "keys": ["perché", "alti", "tanto", "così"],
+          "a": "Perché il 21% annuo applicato a €3.000 fa circa €630 all'anno, cioè circa €52 al mese. Finché il debito resta alto restano alti anche gli interessi: con €8 al mese il debito cala pochissimo. 👻" },
+        { "q": "Cos'è una carta revolving?", "keys": ["cos'è", "cosa è", "revolving", "carta", "funziona"],
+          "a": "È una carta di credito che permette di rimborsare a rate: il debito non si salda tutto a fine mese, ma si restituisce poco alla volta con una rata minima. Sul debito residuo maturano interessi, spesso con tassi più alti di un prestito personale." },
+        { "q": "Come mai servono 10 anni?", "keys": ["10", "dieci", "anni", "mesi", "quanto ci vuole"],
+          "a": "All'inizio solo €8 al mese riducono il debito. Man mano che il debito scende, gli interessi calano un po' e la quota che riduce il debito cresce, ma molto lentamente: per arrivare a zero servono circa 120 rate da €60." },
+        { "q": "Cosa succede se pago più della rata minima?", "keys": ["più della", "oltre", "extra", "di più", "aument"],
+          "a": "Ogni euro in più rispetto alla rata minima va direttamente a ridurre il debito, perché gli interessi del mese sono già coperti. Un debito più basso fa maturare meno interessi il mese dopo: per questo i tempi si accorciano." }
+      ],
+      "check": {
+        "question": "Debito di €2.000 su una carta revolving al 18% annuo, rata minima €40. Della prima rata, quanti euro riducono il debito?",
+        "options": ["€40", "€30", "€10"],
+        "correct": 2,
+        "reactions": [
+          "Prima alla cassa passa l'ospite invisibile 👻: €2.000 × 18% ÷ 12 = €30 di interessi. Dei €40, quanti ne restano per il debito?",
+          "€30 sono proprio gli interessi del primo mese: €2.000 × 18% ÷ 12. La domanda però è quanto resta per ridurre il debito…",
+          "Hai fatto passare prima gli interessi: €2.000 × 18% ÷ 12 = €30. Dei €40 restano €10 per il debito: il resto è il prezzo del tempo."
+        ]
+      }
+    }
+  }
+}

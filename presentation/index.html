@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FinGenius 360 — Hackathon</title>
+<style>
+  :root {
+    --purple: #A100FF;
+    --purple-dark: #7500C0;
+    --purple-deep: #460073;
+    --purple-soft: #F3E6FF;
+    --black: #000;
+    --ink: #1A1A1A;
+    --gray: #6E6E6E;
+    --gray-light: #F2F2F2;
+    --line: #E1E1E1;
+    --white: #FFF;
+    --fg-navy: #0A2540;
+    --fg-teal: #00B3A4;
+    --fg-gold: #F5B700;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; background: #111; overflow: hidden; }
+  body { font-family: Graphik, Arial, Helvetica, sans-serif; color: var(--ink); display: grid; place-items: center; }
+
+  .deck { width: 1280px; height: 720px; position: relative; transform-origin: center; }
+  .slide { position: absolute; inset: 0; padding: 64px 80px; background: var(--white); display: none; flex-direction: column; overflow: hidden; }
+  .slide.active { display: flex; animation: fade .35s ease-out; }
+  @keyframes fade { from { opacity: 0; transform: translateX(12px); } to { opacity: 1; transform: none; } }
+  .slide.dark { background: var(--black); color: var(--white); }
+
+  .gt { color: var(--purple); font-weight: 700; }
+  .kicker { font-size: 15px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--purple); margin-bottom: 14px; }
+  h1 { font-size: 64px; line-height: 1.05; font-weight: 700; letter-spacing: -1px; }
+  h2 { font-size: 40px; line-height: 1.12; font-weight: 700; letter-spacing: -.5px; margin-bottom: 28px; }
+  h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+  p, li { font-size: 18px; line-height: 1.5; }
+  .muted { color: var(--gray); }
+  .dark .muted { color: #B3B3B3; }
+  ul.clean { list-style: none; }
+  ul.clean li { padding-left: 22px; position: relative; margin-bottom: 10px; }
+  ul.clean li::before { content: '>'; position: absolute; left: 0; color: var(--purple); font-weight: 700; }
+
+  .footer { position: absolute; left: 80px; right: 80px; bottom: 28px; display: flex; justify-content: space-between; font-size: 12px; color: var(--gray); letter-spacing: .5px; }
+  .dark .footer { color: #8C8C8C; }
+
+  .grid { display: grid; gap: 24px; }
+  .g2 { grid-template-columns: 1fr 1fr; }
+  .g3 { grid-template-columns: repeat(3, 1fr); }
+  .g4 { grid-template-columns: repeat(4, 1fr); }
+  .g5 { grid-template-columns: repeat(5, 1fr); }
+  .card { background: var(--gray-light); padding: 24px; border-top: 4px solid var(--purple); }
+  .card p, .card li { font-size: 16px; }
+  .card .num { font-size: 44px; font-weight: 700; color: var(--purple); line-height: 1; margin-bottom: 8px; }
+  .tag { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 4px 10px; background: var(--purple); color: var(--white); margin-bottom: 12px; }
+  .tag.outline { background: transparent; color: var(--purple); border: 1px solid var(--purple); }
+
+  /* Cover */
+  .cover-gt { position: absolute; right: -40px; top: 50%; transform: translateY(-50%); font-size: 620px; line-height: 1; font-weight: 700; color: var(--purple); opacity: .95; }
+  .cover-brand { display: flex; align-items: center; gap: 16px; margin-bottom: 36px; }
+  .cover-brand img { width: 72px; height: 72px; background: #fff; border-radius: 50%; padding: 6px; }
+  .cover-brand span { font-size: 22px; font-weight: 700; }
+  .cover-brand span b { color: var(--fg-gold); }
+
+  /* Statement */
+  .statement { font-size: 34px; line-height: 1.35; font-weight: 400; max-width: 1000px; }
+  .statement strong { color: var(--purple); font-weight: 700; }
+
+  /* Flow */
+  .flow { display: flex; align-items: stretch; gap: 0; margin-top: 12px; }
+  .step { flex: 1; padding: 22px 18px; background: var(--gray-light); position: relative; }
+  .step + .step { margin-left: 26px; }
+  .step + .step::before { content: '>'; position: absolute; left: -21px; top: 50%; transform: translateY(-50%); color: var(--purple); font-weight: 700; font-size: 26px; }
+  .step .n { font-size: 13px; font-weight: 700; color: var(--purple); letter-spacing: 1px; margin-bottom: 8px; }
+  .step h3 { font-size: 18px; }
+  .step p { font-size: 14px; color: var(--gray); }
+
+  /* Phone mockup (brand FinGenius) */
+  .phone { width: 360px; height: 560px; border-radius: 34px; background: #0b0b0b; padding: 12px; box-shadow: 0 20px 50px rgba(0,0,0,.25); flex: none; }
+  .screen { width: 100%; height: 100%; border-radius: 24px; overflow: hidden; background: #EEF3F7; font-family: 'Segoe UI', Arial, sans-serif; display: flex; flex-direction: column; }
+  .m-top { background: #fff; display: flex; align-items: center; gap: 8px; padding: 10px 12px; border-bottom: 1px solid #DCE4EC; }
+  .m-top img { width: 28px; height: 28px; }
+  .m-top b { font-size: 13px; color: var(--fg-navy); }
+  .m-top b span { color: var(--fg-gold); }
+  .m-banner { background: linear-gradient(135deg, #0A2540, #13355C); color: #fff; padding: 12px 14px; border-radius: 0 0 16px 16px; }
+  .m-banner small { color: var(--fg-gold); font-size: 9px; font-weight: 800; letter-spacing: 1px; }
+  .m-banner div { font-size: 15px; font-weight: 800; }
+  .m-body { padding: 10px; display: flex; flex-direction: column; gap: 6px; }
+  .m-b { background: #fff; border-radius: 12px 12px 12px 4px; padding: 7px 10px; font-size: 10.5px; line-height: 1.4; color: #1B2B3A; max-width: 92%; box-shadow: 0 1px 2px rgba(10,37,64,.08); }
+  .m-b.scene { border-left: 3px solid var(--fg-gold); }
+  .m-b.q { background: #E0F7F5; border: 1.5px solid var(--fg-teal); font-weight: 700; }
+  .m-b.react { background: #FFF6D6; border: 1.5px solid var(--fg-gold); max-width: 100%; }
+  .m-label { font-size: 8px; font-weight: 800; letter-spacing: .8px; color: #008C80; text-transform: uppercase; }
+  .m-opt { background: #fff; border: 1.5px solid #DCE4EC; border-radius: 10px; padding: 6px 9px; font-size: 10px; display: flex; gap: 6px; align-items: center; }
+  .m-opt i { font-style: normal; width: 16px; height: 16px; border-radius: 50%; background: #EEF3F7; display: grid; place-items: center; font-size: 8px; font-weight: 800; }
+  .m-opt.sel { background: var(--fg-teal); border-color: var(--fg-teal); color: #fff; }
+  .m-opt.sel i { background: #fff; color: #008C80; }
+  .m-opt.dim { opacity: .4; }
+  .m-user { align-self: flex-end; background: #0A2540; color: #fff; border-radius: 12px 12px 4px 12px; padding: 7px 10px; font-size: 10px; max-width: 85%; }
+  .m-user em { color: var(--fg-gold); font-style: normal; font-weight: 700; }
+
+  .callouts { display: flex; flex-direction: column; gap: 16px; }
+  .callout { display: flex; gap: 14px; align-items: flex-start; }
+  .callout .b { flex: none; width: 34px; height: 34px; background: var(--purple); color: #fff; font-weight: 700; display: grid; place-items: center; font-size: 15px; }
+  .callout h3 { font-size: 17px; margin-bottom: 2px; }
+  .callout p { font-size: 15px; color: var(--gray); }
+
+  /* Before / After */
+  .ba { display: grid; grid-template-columns: 1fr 60px 1fr; align-items: stretch; }
+  .ba .arrow { display: grid; place-items: center; font-size: 48px; color: var(--purple); font-weight: 700; }
+  .before { background: var(--gray-light); padding: 22px; border-left: 4px solid #9E9E9E; }
+  .after { background: var(--purple-soft); padding: 22px; border-left: 4px solid var(--purple); }
+  .before p, .after p { font-size: 16px; }
+  .quote { font-family: Georgia, serif; font-style: italic; }
+  .ba-row + .ba-row { margin-top: 18px; }
+
+  /* Architecture */
+  .arch { display: grid; grid-template-columns: 1fr 1.25fr 1fr; gap: 22px; align-items: center; }
+  .box { border: 2px solid var(--ink); padding: 18px; background: #fff; }
+  .box.purple { border-color: var(--purple); background: var(--purple-soft); }
+  .box.dark { background: var(--black); color: #fff; border-color: var(--black); }
+  .box h3 { font-size: 17px; }
+  .box p, .box li { font-size: 14px; }
+  .box code, .mono { font-family: Consolas, monospace; font-size: 13px; }
+  .tool { background: #fff; border: 1px solid var(--purple); padding: 8px 10px; margin-top: 8px; font-size: 13px; }
+  .tool b { font-family: Consolas, monospace; color: var(--purple-dark); }
+  .link { text-align: center; font-size: 13px; color: var(--gray); }
+  .link b { display: block; font-size: 26px; color: var(--purple); }
+
+  /* Repo tree */
+  pre.tree { font-family: Consolas, monospace; font-size: 15px; line-height: 1.55; background: var(--black); color: #EDEDED; padding: 24px 28px; }
+  pre.tree .c { color: #9E9E9E; }
+  pre.tree .p { color: #D9A6FF; }
+
+  /* Method */
+  .phase { border-left: 4px solid var(--purple); padding: 4px 0 4px 18px; }
+  .phase .n { font-size: 52px; font-weight: 700; color: var(--purple); line-height: 1; }
+  .phase h3 { margin-top: 8px; }
+  .phase p { font-size: 15px; color: var(--gray); }
+
+  /* Team */
+  .role { background: var(--gray-light); padding: 18px 16px; }
+  .role .ico { font-size: 28px; margin-bottom: 8px; }
+  .role h3 { font-size: 16px; }
+  .role p { font-size: 13px; color: var(--gray); line-height: 1.45; }
+  .role .out { margin-top: 10px; font-family: Consolas, monospace; font-size: 11px; color: var(--purple-dark); }
+
+  /* Aula mockup */
+  .class-mock { width: 560px; flex: none; border-radius: 18px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,.22); font-family: 'Segoe UI', Arial, sans-serif; background: #EEF3F7; }
+  .cm-head { background: linear-gradient(135deg, #0A2540, #13355C); color: #fff; padding: 10px 16px; }
+  .cm-head small { color: var(--fg-gold); font-size: 10px; font-weight: 800; letter-spacing: 1px; }
+  .cm-head div { font-size: 16px; font-weight: 800; }
+  .cm-room { position: relative; display: flex; align-items: flex-end; gap: 8px; padding: 14px 14px 26px; background: linear-gradient(180deg, #F6EBD9 0, #EFDFC4 78%, #B98B5E 78%, #A87A4E 100%); }
+  .cm-board { flex: 1; border: 7px solid #8B5E34; border-radius: 8px; background: radial-gradient(ellipse at 30% 20%, #2E5A45, #1D3D2F 70%); color: #F4F1E8; font-family: 'Segoe Print', 'Comic Sans MS', cursive; padding: 12px 14px; }
+  .cm-board .h { font-size: 10px; color: #FFE58A; text-transform: uppercase; letter-spacing: .5px; }
+  .cm-board .r { font-size: 15px; padding: 4px 0; border-bottom: 1px solid rgba(244,241,232,.18); }
+  .cm-bar { display: grid; grid-template-columns: 70px 1fr 34px; gap: 6px; align-items: center; font-size: 12px; margin-top: 6px; }
+  .cm-bar i { display: block; height: 12px; border: 1.5px solid rgba(244,241,232,.5); border-radius: 4px; background: repeating-linear-gradient(45deg, #F4F1E8 0 5px, #D9D3C4 5px 10px); }
+  .cm-bar i.y { background: repeating-linear-gradient(45deg, #FFE58A 0 5px, #E8C95A 5px 10px); }
+  .cm-genie { width: 74px; flex: none; }
+  .cm-students { position: absolute; left: 0; right: 0; bottom: -8px; display: flex; justify-content: space-around; }
+  .cm-students span { width: 28px; height: 28px; border-radius: 50% 50% 6px 6px; background: rgba(10,37,64,.85); }
+  .cm-cap { margin: 10px 12px 0; background: #fff; border: 2px solid var(--fg-teal); border-radius: 12px; padding: 7px 10px; font-size: 11px; line-height: 1.4; }
+  .cm-cap b { display: block; font-size: 8px; color: #008C80; letter-spacing: .8px; text-transform: uppercase; }
+  .cm-ctl { display: flex; gap: 6px; align-items: center; padding: 8px 12px; }
+  .cm-ctl span { width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid #DCE4EC; background: #fff; display: grid; place-items: center; font-size: 9px; }
+  .cm-ctl span.m { width: 26px; height: 26px; background: #0A2540; color: #fff; border-color: #0A2540; }
+  .cm-ctl em { flex: 1; height: 5px; border-radius: 3px; background: linear-gradient(90deg, #00B3A4 0 40%, #F5B700 40% 60%, #DCE4EC 60%); }
+  .cm-ctl strong { font-size: 10px; border: 1.5px solid #0A2540; border-radius: 12px; padding: 3px 8px; color: #0A2540; }
+  .cm-qa { margin: 0 12px 12px; background: #fff; border-radius: 12px; padding: 8px 10px; display: flex; flex-direction: column; gap: 5px; }
+  .cm-me { align-self: flex-end; background: #0A2540; color: #fff; font-size: 10px; padding: 5px 9px; border-radius: 10px 10px 3px 10px; }
+  .cm-ge { align-self: flex-start; font-size: 10px; padding: 5px 9px; border-radius: 10px 10px 10px 3px; max-width: 88%; line-height: 1.35; }
+  .cm-ge.ok { background: #FFF6D6; border: 1.5px solid var(--fg-gold); }
+  .cm-ge.guard { background: #E0F7F5; border: 1.5px solid #008C80; }
+
+  /* Esperto mockup */
+  .x-mock { width: 360px; flex: none; font-family: 'Segoe UI', Arial, sans-serif; display: flex; flex-direction: column; gap: 12px; }
+  .x-card { background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 14px 34px rgba(0,0,0,.18); }
+  .x-top { background: linear-gradient(135deg, #0A2540, #13355C); color: #fff; padding: 12px 14px; display: flex; gap: 10px; align-items: center; border-bottom: 3px solid var(--fg-teal); }
+  .x-top .av { display: flex; } .x-top .av span { width: 30px; height: 30px; border-radius: 50%; background: #fff; display: grid; place-items: center; font-size: 15px; margin-left: -8px; border: 2px solid #13355C; } .x-top .av span:first-child { margin-left: 0; }
+  .x-top b { font-size: 13px; display: block; } .x-top small { font-size: 10px; color: #CFE0EE; }
+  .x-chips { padding: 9px 14px 0; display: flex; gap: 5px; flex-wrap: wrap; font-size: 9px; color: #6B7C8F; font-weight: 700; align-items: center; }
+  .x-chips i { font-style: normal; background: #0A2540; color: #fff; padding: 3px 8px; border-radius: 10px; }
+  .x-choices { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 10px 14px 14px; }
+  .x-choice { border: 1.5px solid #DCE4EC; border-radius: 12px; padding: 9px; font-size: 11px; color: #0A2540; }
+  .x-choice b { display: block; font-size: 12px; margin-top: 4px; } .x-choice small { color: #6B7C8F; font-size: 9px; }
+  .x-choice .ic { width: 28px; height: 28px; border-radius: 8px; background: #FFF6D6; display: grid; place-items: center; font-size: 15px; }
+  .x-choice.sel { border-color: var(--fg-teal); box-shadow: 0 4px 12px rgba(0,179,164,.25); }
+  .x-ticket { background: #fff; border: 2px solid var(--fg-teal); border-radius: 14px; overflow: hidden; box-shadow: 0 14px 34px rgba(0,0,0,.15); }
+  .x-ticket .tt { background: #E0F7F5; color: #008C80; font-weight: 800; font-size: 11px; padding: 7px 12px; display: flex; justify-content: space-between; }
+  .x-ticket .tt span { font-family: Consolas, monospace; color: #0A2540; background: #fff; border: 1px dashed var(--fg-teal); padding: 0 6px; border-radius: 5px; }
+  .x-ticket .tb { display: flex; gap: 12px; align-items: center; padding: 10px 12px; font-size: 11px; color: #1B2B3A; }
+  .x-cal { width: 50px; text-align: center; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 6px rgba(10,37,64,.15); }
+  .x-cal i { display: block; font-style: normal; background: #0A2540; color: var(--fg-gold); font-size: 8px; font-weight: 800; padding: 2px 0; }
+  .x-cal b { display: block; font-size: 20px; color: #0A2540; }
+  .x-ticket .tb strong { font-size: 14px; color: #0A2540; display: block; }
+
+  /* Nav */
+  .nav { position: fixed; bottom: 14px; right: 18px; display: flex; gap: 8px; align-items: center; color: #aaa; font-size: 13px; font-family: Arial, sans-serif; z-index: 10; opacity: 0; transition: opacity .2s; padding: 10px; }
+  .nav:hover, .nav:focus-within { opacity: 1; }
+  .nav button { background: #222; color: #fff; border: 1px solid #444; width: 32px; height: 32px; cursor: pointer; font-size: 14px; }
+  .nav button:hover { background: var(--purple); border-color: var(--purple); }
+  .progress { position: fixed; top: 0; left: 0; height: 4px; background: var(--purple); transition: width .3s; z-index: 10; }
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<div class="deck" id="deck">
+
+  <!-- 1. Cover -->
+  <section class="slide dark">
+    <div class="cover-gt">&gt;</div>
+    <div style="margin-top:auto;margin-bottom:auto;position:relative;max-width:760px">
+      <div class="cover-brand"><img src="assets/logo.svg" alt=""><span>FinGenius <b>360</b></span></div>
+      <h1>Finanza personale,<br>una storia alla volta</h1>
+      <p class="muted" style="font-size:22px;margin-top:22px">Il tuo Genius agentico personale per l'educazione finanziaria di base</p>
+    </div>
+    <div class="footer"><span>Hackathon · Agentic coding per l'educazione finanziaria</span><span>5 ottobre 2026</span></div>
+  </section>
+
+  <!-- 2. Challenge -->
+  <section class="slide">
+    <div class="kicker">La challenge</div>
+    <h2>Rendere la finanza personale comprensibile,<br>senza diventare un consulente</h2>
+    <div class="grid g3" style="margin-top:8px">
+      <div class="card"><h3>Obiettivo</h3><p>Aiutare chi ha bassa alfabetizzazione finanziaria a capire i concetti e a gestire meglio le scelte di ogni giorno.</p></div>
+      <div class="card"><h3>Vincoli</h3><p>Uno scenario educativo preciso. Miglioramento dimostrabile. Nessuna consulenza o raccomandazione. Una capability software concreta.</p></div>
+      <div class="card"><h3>Da evitare</h3><p>Chatbot generici, pura riscrittura di testi, semplificazioni che cambiano il significato, demo staccate da un processo reale.</p></div>
+    </div>
+    <p class="muted" style="margin-top:36px">Scenario scelto: <strong style="color:var(--ink)">comprendere il costo reale del credito</strong>: TAEG, rate, tasso zero, anticipo, carte revolving.</p>
+    <div class="footer"><span>FinGenius 360</span><span>02</span></div>
+  </section>
+
+  <!-- 3. User Difficulty Statement -->
+  <section class="slide dark">
+    <div class="kicker">Deliverable 01 · User Difficulty Statement</div>
+    <p class="statement" style="margin-top:20px">Chi ha poca familiarità con la finanza ha un <strong>doppio punto cieco</strong>: <strong>non sa di non sapere</strong> e prova <strong>imbarazzo ad ammetterlo</strong>.</p>
+    <p class="statement" style="margin-top:28px;font-size:26px;color:#CFCFCF">Quando firma un finanziamento per l'auto, il telefono o la cucina guarda la rata, non il costo. Se ne accorge solo quando l'errore è già fatto.</p>
+    <div class="grid g3" style="margin-top:auto;margin-bottom:30px">
+      <div><h3 class="gt">Chi</h3><p class="muted">Consumatori con bassa alfabetizzazione finanziaria</p></div>
+      <div><h3 class="gt">In quale processo</h3><p class="muted">Valutare un'offerta di credito al consumo</p></div>
+      <div><h3 class="gt">Perché conta</h3><p class="muted">Rate basse e "tasso zero" nascondono costi reali, a volte di migliaia di euro</p></div>
+    </div>
+    <div class="footer"><span>FinGenius 360</span><span>03</span></div>
+  </section>
+
+  <!-- 4. Solution flow -->
+  <section class="slide">
+    <div class="kicker">La soluzione</div>
+    <h2>Un percorso adattivo guidato da Genius</h2>
+    <div class="flow">
+      <div class="step"><div class="n">01</div><h3>Scegli il tema</h3><p>5 cluster: prestiti, busta paga, bollette, budget, conto corrente</p></div>
+      <div class="step"><div class="n">02</div><h3>Vivi la situazione</h3><p>Storie reali, una domanda puntuale, 3 opzioni</p></div>
+      <div class="step"><div class="n">03</div><h3>Spiega il perché</h3><p>Motivazione obbligatoria, "NON LO SO" è ammesso</p></div>
+      <div class="step"><div class="n">04</div><h3>Genius reagisce</h3><p>Calcoli e analogie, mai "giusto" o "sbagliato"</p></div>
+      <div class="step"><div class="n">05</div><h3>In aula con Genius</h3><p>Lavagna animata solo sui concetti deboli, domande libere, verifica</p></div>
+      <div class="step"><div class="n">06</div><h3>Misura il salto</h3><p>Round 2 con situazioni nuove; se serve, un esperto</p></div>
+    </div>
+    <p style="margin-top:40px;font-size:20px">Non è un chatbot generico: è un <strong>processo di apprendimento</strong> con logica adattiva, misurazione e contenuti verificati.</p>
+    <div class="footer"><span>FinGenius 360</span><span>04</span></div>
+  </section>
+
+  <!-- 5. Experience -->
+  <section class="slide">
+    <div class="kicker">L'esperienza</div>
+    <div style="display:flex;gap:56px;align-items:center;flex:1">
+      <div class="phone"><div class="screen">
+        <div class="m-top"><img src="assets/logo.svg" alt=""><b>FinGenius <span>360</span></b></div>
+        <div class="m-banner"><small>SITUAZIONE 2 DI 5</small><div>🚗 L'auto usata</div></div>
+        <div class="m-body">
+          <div class="m-b scene">La tua utilitaria ti ha lasciato a piedi per la terza volta. 😩</div>
+          <div class="m-b">Il venditore propone <b>24 rate da €370</b> oppure <b>48 rate da €210</b>.</div>
+          <div class="m-b q"><div class="m-label">❓ La domanda</div>Quale piano ti fa spendere meno in totale?</div>
+          <div class="m-opt dim"><i>A</i>Le 24 rate da €370</div>
+          <div class="m-opt sel"><i>B</i>Le 48 rate da €210</div>
+          <div class="m-user"><em>Perché:</em> la rata è più bassa, pago meno ogni mese</div>
+          <div class="m-b react"><div class="m-label" style="color:#9A7300">🧞 Genius ci pensa su</div>La rata da €210 fa respirare il portafoglio… ma 48 × €210 = €10.080, mentre 24 × €370 = €8.880.</div>
+        </div>
+      </div></div>
+      <div>
+        <h2 style="margin-bottom:22px">Immersiva come una chat,<br>rigorosa come un test</h2>
+        <div class="callouts">
+          <div class="callout"><div class="b">1</div><div><h3>Prima la storia, poi la domanda</h3><p>Contesti quotidiani, non domande da esame</p></div></div>
+          <div class="callout"><div class="b">2</div><div><h3>La motivazione è obbligatoria</h3><p>Obbliga a ragionare e rivela il vero livello di comprensione</p></div></div>
+          <div class="callout"><div class="b">3</div><div><h3>Reazione socratica</h3><p>Genius mostra il calcolo: l'utente capisce da solo se il ragionamento regge</p></div></div>
+          <div class="callout"><div class="b">4</div><div><h3>Brand proprio</h3><p>Un genio come coach: tono caldo, zero giudizio</p></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><span>FinGenius 360</span><span>05</span></div>
+  </section>
+
+  <!-- 6. Adaptive logic -->
+  <section class="slide">
+    <div class="kicker">La capability software</div>
+    <h2>Logica adattiva: distinguere la fortuna dalla comprensione</h2>
+    <div class="grid g4">
+      <div class="card"><div class="num">✓</div><h3>Risposta giusta e motivata</h3><p>Il concetto è considerato acquisito: nessuna lezione.</p></div>
+      <div class="card"><div class="num">?</div><h3>Giusta con "NON LO SO"</h3><p>Conta nel punteggio, ma il concetto viene <strong>comunque ripassato</strong>.</p></div>
+      <div class="card"><div class="num">✗</div><h3>Risposta sbagliata</h3><p>L'agente porta l'utente in aula sulla lezione specifica per quel concetto.</p></div>
+      <div class="card"><div class="num">Δ</div><h3>Round 2</h3><p><strong>Situazioni nuove</strong> sugli stessi concetti: misura se il concetto è stato capito, non ricordato.</p></div>
+    </div>
+    <div style="margin-top:34px;background:var(--black);color:#fff;padding:22px 28px;display:flex;gap:28px;align-items:center">
+      <div style="font-size:54px;color:var(--purple);font-weight:700;line-height:1">&gt;</div>
+      <p style="font-size:19px">Il punteggio è calcolato dal codice, non dall'LLM. L'agente decide <strong>cosa insegnare</strong> e <strong>come dirlo</strong>, partendo dal ragionamento scritto dall'utente.</p>
+    </div>
+    <div class="footer"><span>FinGenius 360</span><span>06</span></div>
+  </section>
+
+  <!-- 7. Aula di Genius -->
+  <section class="slide">
+    <div class="kicker">Le videolezioni · l'aula di Genius</div>
+    <div style="display:flex;gap:48px;align-items:center;flex:1">
+      <div class="class-mock">
+        <div class="cm-head"><small>🎓 AULA DI GENIUS · LEZIONE 1 DI 2</small><div>La trappola della rata minima</div></div>
+        <div class="cm-room">
+          <div class="cm-board">
+            <div class="h">Dove vanno i tuoi €60</div>
+            <div class="cm-bar"><span>Interessi</span><i style="width:87%"></i><b>€52</b></div>
+            <div class="cm-bar"><span>Debito</span><i class="y" style="width:13%"></i><b>€8</b></div>
+            <div class="r" style="margin-top:8px">€3.000 × 21% ÷ 12 ≈ €52</div>
+          </div>
+          <img class="cm-genie" src="assets/logo.svg" alt="">
+          <div class="cm-students"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        </div>
+        <div class="cm-cap"><b>🧞 Genius</b>Guarda la rata da 60 euro divisa in due: quasi tutto va in interessi.</div>
+        <div class="cm-ctl"><span>⏮</span><span class="m">⏸</span><span>⏭</span><span>↺</span><span>🔈</span><em></em><strong>🙋 Alza la mano</strong></div>
+        <div class="cm-qa">
+          <div class="cm-me">Perché gli interessi sono così alti?</div>
+          <div class="cm-ge ok">Perché il 21% annuo su €3.000 fa circa €630 all'anno, cioè circa €52 al mese…</div>
+          <div class="cm-me">Quale carta mi conviene?</div>
+          <div class="cm-ge guard">Qui mi fermo 🙏: sono un coach educativo, non un consulente…</div>
+        </div>
+      </div>
+      <div>
+        <h2 style="margin-bottom:22px">Una lezione vera,<br>non un testo da leggere</h2>
+        <div class="callouts">
+          <div class="callout"><div class="b">1</div><div><h3>Genius spiega alla lavagna</h3><p>Calcoli, confronti e barre scritti col gesso, scena dopo scena, con sottotitoli e voce opzionale</p></div></div>
+          <div class="callout"><div class="b">2</div><div><h3>Alzi la mano quando vuoi</h3><p>Domande suggerite o libere: l'agente risponde solo con i materiali della lezione</p></div></div>
+          <div class="callout"><div class="b">3</div><div><h3>Guardrail anti-consulenza</h3><p>Le richieste di consiglio sono intercettate dal codice prima dell'LLM</p></div></div>
+          <div class="callout"><div class="b">4</div><div><h3>Verifica con numeri nuovi</h3><p>Una domanda finale e una reazione che mostra il calcolo, senza "giusto" o "sbagliato"</p></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><span>FinGenius 360</span><span>07</span></div>
+  </section>
+
+  <!-- 8. Esperto -->
+  <section class="slide">
+    <div class="kicker">Quando la lezione non basta</div>
+    <div style="display:flex;gap:56px;align-items:center;flex:1">
+      <div class="x-mock">
+        <div class="x-card">
+          <div class="x-top"><div class="av"><span>🎓</span><span>📊</span><span>💬</span></div><div><b>Gli esperti di FinGenius 360</b><small>Educatori finanziari · sessione gratuita di 30 minuti</small></div></div>
+          <div class="x-chips">Partirete da <i>Rata vs costo totale</i><i>Tasso zero</i></div>
+          <div class="x-choices">
+            <div class="x-choice sel"><div class="ic">📅</div><b>Fissa un appuntamento</b><small>Giorno, ora e modalità</small></div>
+            <div class="x-choice"><div class="ic" style="background:#E0F7F5">📞</div><b>Richiamami</b><small>Ti chiamiamo noi</small></div>
+          </div>
+        </div>
+        <div class="x-ticket">
+          <div class="tt">✅ Appuntamento confermato <span>FG-3521</span></div>
+          <div class="tb"><div class="x-cal"><i>OTT</i><b>7</b></div><div><strong>09:30 · 30 minuti</strong>🎥 Videochiamata con un esperto · 📅 Aggiungi al calendario</div></div>
+        </div>
+      </div>
+      <div>
+        <h2 style="margin-bottom:22px">Se il Round 2 resta basso,<br>Genius passa la mano a una persona</h2>
+        <ul class="clean">
+          <li><strong>Soglia deterministica:</strong> sotto 3/5 nel Round 2 compare la proposta, con i concetti ancora deboli</li>
+          <li><strong>Due strade:</strong> fissare un appuntamento (modalità, giorno, orario) o lasciare il numero per essere richiamati</li>
+          <li><strong>Privacy by design:</strong> consenso obbligatorio, validazione lato server, nessun dato personale nei log</li>
+          <li><strong>Formazione, non vendita:</strong> l'esperto ripassa i concetti, nessun prodotto proposto</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer"><span>FinGenius 360</span><span>08</span></div>
+  </section>
+
+  <!-- 7. Before / After -->
+  <section class="slide">
+    <div class="kicker">Deliverable 02 · Before / After Simplicity Evidence</div>
+    <h2 style="margin-bottom:22px">Stesso concetto, stessa precisione, molta più chiarezza</h2>
+    <div class="ba ba-row">
+      <div class="before"><span class="tag outline">Prima · testo normativo</span><p class="quote">"Il TAEG è il costo totale del credito a carico del consumatore, espresso in percentuale annua dell'importo totale del credito, comprensivo degli interessi e di tutti gli oneri…"</p></div>
+      <div class="arrow">&gt;</div>
+      <div class="after"><span class="tag">Dopo · Genius</span><p class="quote">"Il TAN è come il prezzo di un volo senza bagaglio né tasse: sembra basso, ma non è quello che paghi. Il TAEG è il prezzo finale, con tutto dentro."</p></div>
+    </div>
+    <div class="ba ba-row">
+      <div class="before"><span class="tag outline">Prima · flusso</span><p>Questionario: domanda astratta → risposta → punteggio. Nessuna spiegazione, nessun contesto.</p></div>
+      <div class="arrow">&gt;</div>
+      <div class="after"><span class="tag">Dopo · flusso</span><p>Storia → domanda → scelta e motivazione → calcolo mostrato da Genius → lezione in aula con domande → situazioni nuove.</p></div>
+    </div>
+    <div class="ba ba-row">
+      <div class="before"><span class="tag outline">Prima · comprensione</span><p>"La rata da €210 costa meno." Si guarda la rata.</p></div>
+      <div class="arrow">&gt;</div>
+      <div class="after"><span class="tag">Dopo · comprensione</span><p>Rata × mesi = costo reale, applicato anche a situazioni mai viste. Il miglioramento è misurato: Round 1 contro Round 2.</p></div>
+    </div>
+    <div class="footer"><span>FinGenius 360</span><span>09</span></div>
+  </section>
+
+  <!-- 8. Architecture -->
+  <section class="slide">
+    <div class="kicker">Architettura agentica</div>
+    <h2>Numeri deterministici, linguaggio generativo</h2>
+    <div class="arch">
+      <div class="box">
+        <h3>Frontend</h3>
+        <p>SPA in HTML/JS vanilla</p>
+        <ul class="clean" style="margin-top:10px"><li style="font-size:14px">Chat, stage del quiz e aula</li><li style="font-size:14px">Player delle lezioni con lavagna animata</li><li style="font-size:14px">Prenotazione esperto e file .ics</li></ul>
+      </div>
+      <div class="box purple">
+        <h3>🧞 Agente Genius · Claude</h3>
+        <p>Loop agentico con tool use (max 6 turni, timeout, fallback)</p>
+        <div class="tool"><b>score_quiz</b> punteggio, concetti errati e indovinati</div>
+        <div class="tool"><b>select_lessons</b> lezioni per i concetti deboli</div>
+        <div class="tool"><b>reaction · ask</b> reazione socratica e risposte in aula</div>
+        <div class="tool"><b>ADVICE_RE</b> guardrail anti-consulenza prima dell'LLM</div>
+      </div>
+      <div class="box dark">
+        <h3>Contenuti verificati</h3>
+        <p style="color:#ccc">Un solo file dati: situazioni, Round 2, lezioni, FAQ e verifiche. I calcoli sono controllati all'avvio</p>
+        <p style="margin-top:12px;color:#ccc">Demo mode: senza API key funzionano lo stesso flusso e gli stessi tool</p>
+      </div>
+    </div>
+    <div class="grid g4" style="margin-top:22px">
+      <div class="link"><b>&gt;</b><span class="mono">/api/react</span> · dopo ogni risposta</div>
+      <div class="link"><b>&gt;</b><span class="mono">/api/evaluate</span> · fine Round 1</div>
+      <div class="link"><b>&gt;</b><span class="mono">/api/ask</span> · domande in aula</div>
+      <div class="link"><b>&gt;</b><span class="mono">/api/contact</span> · esperto</div>
+    </div>
+    <div class="footer"><span>FinGenius 360</span><span>10</span></div>
+  </section>
+
+  <!-- 9. Repo -->
+  <section class="slide">
+    <div class="kicker">Struttura del repository</div>
+    <div class="grid g2" style="gap:48px;align-items:start">
+      <pre class="tree"><span class="p">/</span>
+├── <span class="p">app/</span>              <span class="c"># prototipo</span>
+│   ├── index.html      <span class="c"># chat, stage, aula</span>
+│   ├── server.js       <span class="c"># agente + tool + API</span>
+│   ├── data/           <span class="c"># contenuti verificati</span>
+│   ├── lib/ scripts/   <span class="c"># controllo calcoli</span>
+│   └── tests/          <span class="c"># E2E Puppeteer</span>
+├── <span class="p">agents/</span>
+│   ├── agent.md        <span class="c"># Genius</span>
+│   ├── workflow.md
+│   ├── prompts/        <span class="c"># system, reaction, ask</span>
+│   ├── tools/          <span class="c"># score_quiz, select_lessons</span>
+│   ├── skills/         <span class="c"># nuova lezione, verifica</span>
+│   ├── team/           <span class="c"># commissione di agenti</span>
+│   └── reports/        <span class="c"># review e test</span>
+├── <span class="p">presentation/</span>     <span class="c"># questa deck</span>
+└── README.md</pre>
+      <div>
+        <h2 style="font-size:34px">La struttura agentica è parte del prodotto</h2>
+        <ul class="clean">
+          <li><strong>Agente di prodotto:</strong> Genius, con prompt e tool versionati</li>
+          <li><strong>Agenti di sviluppo:</strong> una commissione con ruoli, input e output definiti</li>
+          <li><strong>Tracciabilità:</strong> ogni review e ogni test lascia un report in <span class="mono">agents/reports/</span></li>
+          <li><strong>Estendibile:</strong> un nuovo cluster richiede solo contenuti, non nuovo codice</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer"><span>FinGenius 360</span><span>11</span></div>
+  </section>
+
+  <!-- 10. Methodology -->
+  <section class="slide">
+    <div class="kicker">Metodologia</div>
+    <h2>Dall'idea al prototipo testato in 3 ore</h2>
+    <div class="grid g4" style="gap:30px">
+      <div class="phase"><div class="n">01</div><h3>Ideazione</h3><p>Brainstorming strutturato BMad: <strong>Question Storming</strong> per definire il problema, <strong>What If</strong> per esplorare, <strong>SCAMPER</strong> per ridurre il perimetro.</p></div>
+      <div class="phase"><div class="n">02</div><h3>Agentic coding</h3><p>Sviluppo con Claude Code: app, agente, tool e documentazione generati e rifiniti in coppia con l'AI.</p></div>
+      <div class="phase"><div class="n">03</div><h3>Iterazione</h3><p>Cicli di feedback del product owner: da questionario a chat immersiva, poi stage e reazioni socratiche, infine aula interattiva ed esperti.</p></div>
+      <div class="phase"><div class="n">04</div><h3>Commissione</h3><p>Cinque agenti specializzati verificano contenuti, UX, architettura e qualità prima del passo successivo.</p></div>
+    </div>
+    <div style="margin-top:40px;padding:20px 24px;background:var(--purple-soft);border-left:4px solid var(--purple)">
+      <p><strong>Principio guida:</strong> l'AI accelera il lavoro, ma ogni contenuto finanziario passa da un controllo esplicito e ogni scelta UX da una validazione.</p>
+    </div>
+    <div class="footer"><span>FinGenius 360</span><span>12</span></div>
+  </section>
+
+  <!-- 11. Committee -->
+  <section class="slide">
+    <div class="kicker">Qualità · la commissione di agenti</div>
+    <h2>Cinque ruoli, un flusso di validazione</h2>
+    <div class="grid g5" style="gap:14px">
+      <div class="role"><div class="ico">💶</div><h3>Esperto finanza</h3><p>Calcoli, definizioni normative, linguaggio non prescrittivo</p><div class="out">finance-review.md</div></div>
+      <div class="role"><div class="ico">🎨</div><h3>Esperto UX</h3><p>Usabilità, accessibilità, brand. Valida il testbook</p><div class="out">ux-review.md</div></div>
+      <div class="role"><div class="ico">🏛️</div><h3>Architetto IT</h3><p>Robustezza, sicurezza, progetto delle videolezioni</p><div class="out">solution-design.md</div></div>
+      <div class="role"><div class="ico">💻</div><h3>Sviluppatore</h3><p>Implementa secondo design e requisiti</p><div class="out">app/</div></div>
+      <div class="role"><div class="ico">🧪</div><h3>Tester</h3><p>Testbook validato da UX, test API ed E2E automatizzati su Edge</p><div class="out">test-report.md</div></div>
+    </div>
+    <div class="grid g4" style="margin-top:30px">
+      <div class="card"><div class="num">44/58</div><p>test superati al primo giro; i difetti bloccanti sono già corretti</p></div>
+      <div class="card"><div class="num">17</div><p>finding UX, con quick win prioritizzati</p></div>
+      <div class="card"><div class="num">19</div><p>finding di architettura e sicurezza, i bloccanti chiusi</p></div>
+      <div class="card"><div class="num">19</div><p>calcoli dei contenuti verificati in automatico a ogni avvio</p></div>
+    </div>
+    <div class="footer"><span>FinGenius 360</span><span>13</span></div>
+  </section>
+
+  <!-- 12. Risk & Clarity -->
+  <section class="slide">
+    <div class="kicker">Deliverable 03 · Risk &amp; Clarity Note</div>
+    <h2>Semplice, ma non semplificato</h2>
+    <div class="grid g3">
+      <div class="card"><span class="tag">Semplificato</span><ul class="clean"><li>Linguaggio tecnico in italiano quotidiano</li><li>Concetti astratti in storie e analogie</li><li>Formule in moltiplicazioni visibili</li></ul></div>
+      <div class="card"><span class="tag">Non alterato</span><ul class="clean"><li>Numeri e calcoli, sempre verificabili</li><li>Definizioni di TAN e TAEG</li><li>Rapporti causa-effetto: durata, interessi, anticipo</li></ul></div>
+      <div class="card"><span class="tag">Ambiguità evitata</span><ul class="clean"><li>Domande fattuali: "quale costa meno", mai "quale conviene"</li><li>Numeri solo da dati statici, mai dall'LLM</li><li>Disclaimer: strumento educativo, non consulenza</li></ul></div>
+    </div>
+    <p class="muted" style="margin-top:26px;font-size:16px">Rischi gestiti: richieste di consiglio in aula bloccate da un guardrail nel codice; prompt injection tramite motivazioni e domande (testo trattato come dato, punteggio deterministico); rinvio a un esperto umano quando il Round 2 resta basso, con consenso esplicito.</p>
+    <div class="footer"><span>FinGenius 360</span><span>14</span></div>
+  </section>
+
+  <!-- 13. Roadmap -->
+  <section class="slide">
+    <div class="kicker">Prossimi passi</div>
+    <h2>Da prototipo a percorso completo</h2>
+    <div class="grid g3">
+      <div class="card"><span class="tag outline">Next</span><h3>4 nuovi cluster</h3><p>Busta paga, bollette e abbonamenti, budget personale, conto corrente: stesso agente e stessa aula, solo nuovi contenuti.</p></div>
+      <div class="card"><span class="tag outline">Next</span><h3>Rete di esperti reale</h3><p>Agende collegate al calendario degli educatori, conferme via email e SMS, gestione sicura dei contatti.</p></div>
+      <div class="card"><span class="tag outline">Next</span><h3>Accessibilità e qualità</h3><p>Ultimi finding UX (contrasto, annunci per screen reader), regressione completa e nuova revisione dei contenuti.</p></div>
+    </div>
+    <div class="footer"><span>FinGenius 360</span><span>15</span></div>
+  </section>
+
+  <!-- 14. Close -->
+  <section class="slide dark">
+    <div class="cover-gt">&gt;</div>
+    <div style="margin:auto 0;position:relative;max-width:720px">
+      <div class="cover-brand"><img src="assets/logo.svg" alt=""><span>FinGenius <b>360</b></span></div>
+      <h1>Grazie</h1>
+      <p class="muted" style="font-size:22px;margin-top:20px">Demo live: <span class="mono" style="font-size:20px;color:#fff">cd app &amp;&amp; npm start</span> → localhost:3000</p>
+    </div>
+    <div class="footer"><span>Hackathon · Agentic coding per l'educazione finanziaria</span><span>16</span></div>
+  </section>
+</div>
+
+<div class="nav"><button id="prev" aria-label="Precedente">&#8592;</button><span id="count"></span><button id="next" aria-label="Successiva">&#8594;</button></div>
+
+<script>
+const slides = [...document.querySelectorAll('.slide')];
+const deck = document.getElementById('deck');
+let i = Math.max(0, Math.min(slides.length - 1, parseInt(location.hash.slice(1)) - 1 || 0));
+
+function show(n) {
+  i = Math.max(0, Math.min(slides.length - 1, n));
+  slides.forEach((s, k) => s.classList.toggle('active', k === i));
+  document.getElementById('count').textContent = `${i + 1} / ${slides.length}`;
+  document.getElementById('progress').style.width = `${(i + 1) / slides.length * 100}%`;
+  history.replaceState(null, '', `#${i + 1}`);
+}
+
+function fit() {
+  const s = Math.min(innerWidth / 1280, innerHeight / 720);
+  deck.style.transform = `scale(${s})`;
+}
+
+document.addEventListener('keydown', e => {
+  if (['ArrowRight', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); show(i + 1); }
+  if (['ArrowLeft', 'PageUp'].includes(e.key)) { e.preventDefault(); show(i - 1); }
+  if (e.key === 'Home') show(0);
+  if (e.key === 'End') show(slides.length - 1);
+  if (e.key === 'f') document.documentElement.requestFullscreen?.();
+});
+document.getElementById('prev').onclick = () => show(i - 1);
+document.getElementById('next').onclick = () => show(i + 1);
+addEventListener('resize', fit);
+addEventListener('hashchange', () => { const n = parseInt(location.hash.slice(1)) - 1; if (n !== i && !isNaN(n)) show(n); });
+fit();
+show(i);
+</script>
+</body>
+</html>

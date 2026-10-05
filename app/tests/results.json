@@ -1,0 +1,353 @@
+{
+  "results": [
+    {
+      "id": "TC-01",
+      "status": "PASS",
+      "desc": "evaluate: tutte corrette → score=5, lessons=[], encouragement presente"
+    },
+    {
+      "id": "TC-02",
+      "status": "PASS",
+      "desc": "evaluate: tutte corrette + NON LO SO → 5 lessons, feedback guess"
+    },
+    {
+      "id": "TC-03",
+      "status": "PASS",
+      "desc": "evaluate: tutte sbagliate → score=0, 5 lessons"
+    },
+    {
+      "id": "TC-04",
+      "status": "PASS",
+      "desc": "evaluate: body malformato → HTTP 500 + JSON error + server vivo"
+    },
+    {
+      "id": "TC-05",
+      "status": "PASS",
+      "desc": "evaluate: answers fuori range → score=0, 5 lessons, no crash"
+    },
+    {
+      "id": "TC-06",
+      "status": "PASS",
+      "desc": "react: risposta valida, nessun giudizio esplicito"
+    },
+    {
+      "id": "TC-07",
+      "status": "PASS",
+      "desc": "react: NON LO SO → indizio senza rivelare risposta"
+    },
+    {
+      "id": "TC-47",
+      "status": "PASS",
+      "desc": "NON LO SO minuscolo riconosciuto → feedback guess + lesson"
+    },
+    {
+      "id": "TC-41",
+      "status": "FAIL",
+      "desc": "Avatar bubble ripetono aria-label=\"FinGenius 360\" senza aria-hidden"
+    },
+    {
+      "id": "TC-42",
+      "status": "PASS",
+      "desc": "<label for=\"mot\"> e <textarea id=\"mot\"> correttamente abbinati",
+      "reason": "Verificato da codice"
+    },
+    {
+      "id": "TC-50",
+      "status": "FAIL",
+      "desc": "Intestazioni feedback con etichette esplicite giusto/sbagliato"
+    },
+    {
+      "id": "TC-53",
+      "status": "FAIL",
+      "desc": "Contrasto colori insufficiente (UX-03/04)"
+    },
+    {
+      "id": "TC-51",
+      "status": "Non eseguito",
+      "desc": "Navigazione tastiera E2E",
+      "reason": "Richiede tester umano (Tab/Invio)"
+    },
+    {
+      "id": "TC-52",
+      "status": "Non eseguito",
+      "desc": "Annunci screen reader",
+      "reason": "Richiede NVDA/Narrator attivo"
+    },
+    {
+      "id": "TC-56",
+      "status": "Non eseguito",
+      "desc": "Tasto a capo tastiera virtuale mobile",
+      "reason": "Richiede dispositivo touch fisico"
+    },
+    {
+      "id": "TC-58",
+      "status": "Non eseguito",
+      "desc": "Criteri videolezioni UX",
+      "reason": "Feature non ancora implementata"
+    },
+    {
+      "id": "TC-09",
+      "status": "PASS",
+      "desc": "Bubble di benvenuto con \"Genius\""
+    },
+    {
+      "id": "TC-10",
+      "status": "PASS",
+      "desc": "5 cluster: 1 attivo \"Disponibile\", 4 \"Presto\""
+    },
+    {
+      "id": "TC-11",
+      "status": "PASS",
+      "desc": "Cluster attivo selezionato: griglia locked, bubble utente"
+    },
+    {
+      "id": "TC-13",
+      "status": "PASS",
+      "desc": "CTA \"Sono pronto\" → #stage attivo, #chat non attivo"
+    },
+    {
+      "id": "TC-43",
+      "status": "PASS",
+      "desc": "View switching: #stage.active dopo \"Sono pronto\""
+    },
+    {
+      "id": "TC-44",
+      "status": "PASS",
+      "desc": "Ordine DOM: storia → domanda → opzioni → answer-card"
+    },
+    {
+      "id": "TC-14",
+      "status": "PASS",
+      "desc": "Bottone disabled senza input; hint corretto"
+    },
+    {
+      "id": "TC-16",
+      "status": "PASS",
+      "desc": "Bottone disabled con solo testo (no opzione selezionata)"
+    },
+    {
+      "id": "TC-20",
+      "status": "PASS",
+      "desc": "Placeholder textarea contiene \"NON LO SO\""
+    },
+    {
+      "id": "TC-15",
+      "status": "PASS",
+      "desc": "Bottone disabled dopo opzione, senza testo; hint corretto"
+    },
+    {
+      "id": "TC-45",
+      "status": "PASS",
+      "desc": "Bottone disabled con solo spazi (trim applicato)"
+    },
+    {
+      "id": "TC-17",
+      "status": "PASS",
+      "desc": "Bottone abilitato con opzione + testo; hint corretto"
+    },
+    {
+      "id": "TC-19",
+      "status": "PASS",
+      "desc": "Shift+Enter aggiunge newline; bottone rimane abilitato"
+    },
+    {
+      "id": "TC-48",
+      "status": "PASS",
+      "desc": "Doppio click: una sola bubble utente creata"
+    },
+    {
+      "id": "TC-22",
+      "status": "PASS",
+      "desc": "Reaction senza giudizio esplicito"
+    },
+    {
+      "id": "TC-23",
+      "status": "PASS",
+      "desc": "Reaction NON LO SO non rivela la risposta corretta"
+    },
+    {
+      "id": "TC-21",
+      "status": "PASS",
+      "desc": "Bubble utente mostra motivazione come plain text"
+    },
+    {
+      "id": "TC-49",
+      "status": "PASS",
+      "desc": "Topbar progress: fase 3/5, dots 1-2 done, dot 3 current"
+    },
+    {
+      "id": "TC-40",
+      "status": "PASS",
+      "desc": "XSS payload renderizzato come plain text; nessun tag HTML nel DOM"
+    },
+    {
+      "id": "TC-38",
+      "status": "PASS",
+      "desc": "Errore rete /api/evaluate: bubble \"Ops\" + bottone \"Riprova\" visibili"
+    },
+    {
+      "id": "TC-43",
+      "status": "PASS",
+      "desc": "View switching: #chat.active durante analisi"
+    },
+    {
+      "id": "TC-24",
+      "status": "PASS",
+      "desc": "Agent card: almeno 3 step marcati done"
+    },
+    {
+      "id": "TC-25",
+      "status": "PASS",
+      "desc": "Score ring mostra \"5/5\""
+    },
+    {
+      "id": "TC-26",
+      "status": "PASS",
+      "desc": "fb-guess Q1: intestazione \"tentativo\" + feedback demo corretto"
+    },
+    {
+      "id": "TC-29",
+      "status": "PASS",
+      "desc": "Bottone \"Ho capito ✓\" diventa disabled dopo click"
+    },
+    {
+      "id": "TC-28",
+      "status": "FAIL",
+      "desc": "Micro-lezioni conteggio"
+    },
+    {
+      "id": "TC-30",
+      "status": "PASS",
+      "desc": "CTA \"Mettimi alla prova →\" visibile dopo lezioni"
+    },
+    {
+      "id": "TC-43",
+      "status": "PASS",
+      "desc": "View switching: #stage.active per Round 2"
+    },
+    {
+      "id": "TC-31",
+      "status": "PASS",
+      "desc": "Round 2: nessun answer-card né textarea"
+    },
+    {
+      "id": "TC-32",
+      "status": "PASS",
+      "desc": "Round 2: un solo click registrato; secondo click ignorato"
+    },
+    {
+      "id": "TC-33",
+      "status": "PASS",
+      "desc": "Barre animate: 100%, 100%"
+    },
+    {
+      "id": "TC-34",
+      "status": "FAIL",
+      "desc": "Delta positivo"
+    },
+    {
+      "id": "TC-35",
+      "status": "PASS",
+      "desc": "Card finale mostra NON LO SO count = 1 volta"
+    },
+    {
+      "id": "TC-36",
+      "status": "PASS",
+      "desc": "Chip concetti: TAEG vs TAN"
+    },
+    {
+      "id": "TC-37",
+      "status": "PASS",
+      "desc": "Disclaimer \"strumento educativo\" presente"
+    },
+    {
+      "id": "TC-37",
+      "status": "PASS",
+      "desc": "Ricomincia: pagina ricaricata, stato azzerato"
+    },
+    {
+      "id": "TC-43",
+      "status": "PASS",
+      "desc": "View switching: #chat.active nella schermata finale/reload"
+    },
+    {
+      "id": "TC-39",
+      "status": "PASS",
+      "desc": "Errore rete /api/react: fallback \"Ci sto ancora pensando…\" mostrato"
+    },
+    {
+      "id": "TC-12",
+      "status": "PASS",
+      "desc": "Cluster \"Presto\": bubble \"in arrivo\" + cluster attivo rimane disponibile"
+    },
+    {
+      "id": "TC-57",
+      "status": "PASS",
+      "desc": "Click ripetuti su cluster \"Presto\": 1 bubble aggiunta (max 1)"
+    },
+    {
+      "id": "TC-54",
+      "status": "FAIL",
+      "desc": "Reduced motion mancante"
+    },
+    {
+      "id": "TC-55",
+      "status": "PASS",
+      "desc": "Viewport 360×640: nessuno scroll orizzontale, topbar h=69px"
+    },
+    {
+      "id": "TC-08",
+      "status": "FAIL",
+      "desc": "react: body vuoto — CRASH SERVER CONFERMATO"
+    }
+  ],
+  "defects": [
+    {
+      "id": "DEF-01",
+      "tc": "TC-41",
+      "sev": "Bassa",
+      "desc": "AVATAR clonato da .topbar .logo mantiene aria-label su ogni bubble bot; manca aria-hidden=\"true\" (UX-16)"
+    },
+    {
+      "id": "DEF-02",
+      "tc": "TC-50",
+      "sev": "Media",
+      "desc": "fb-head.ok=\"✓ Corretta\", fb-head.ko=\"✗ Da rivedere\" — violazione UX-05"
+    },
+    {
+      "id": "DEF-03",
+      "tc": "TC-53",
+      "sev": "Alta",
+      "desc": "\"360\" gold #F5B700 su bianco ≈1.74:1; placeholder #A3B1BF su bianco ≈2.03:1 — sotto soglia 4.5:1 WCAG AA"
+    },
+    {
+      "id": "DEF-04",
+      "tc": "TC-28",
+      "sev": "Alta",
+      "desc": "Totale lezioni cliccate: 1, atteso 2"
+    },
+    {
+      "id": "DEF-05",
+      "tc": "TC-34",
+      "sev": "Alta",
+      "desc": "class=\"delta same\" text=\"100%\""
+    },
+    {
+      "id": "DEF-06",
+      "tc": "TC-54",
+      "sev": "Media",
+      "desc": "Nessun @media (prefers-reduced-motion) nel CSS — animazioni pop/float non disabilitate (UX-07)"
+    },
+    {
+      "id": "DEF-07",
+      "tc": "TC-08",
+      "sev": "Alta",
+      "desc": "HTTP conn-err; server down: fetch failed (Bloccante/ARC-04)"
+    }
+  ],
+  "summary": {
+    "pass": 48,
+    "fail": 7,
+    "skip": 4
+  }
+}
